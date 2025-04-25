@@ -16,6 +16,7 @@ public class HealthSystem : MonoBehaviour
     private void Start()
     {
         currentHealth = maxHealth;
+        Debug.Log($"Salud al iniciar: {currentHealth}");
     }
 
     public void TakeDamage(float damage)
@@ -25,6 +26,7 @@ public class HealthSystem : MonoBehaviour
         currentHealth -= damage;
         currentHealth = Mathf.Max(currentHealth, 0); // Que no pase de 0
         onHealthChanged?.Invoke(currentHealth);
+        Debug.Log($"Salud actual: {currentHealth}");
 
         if (currentHealth <= 0)
         {
@@ -35,8 +37,6 @@ public class HealthSystem : MonoBehaviour
     public void Heal(float amount)
     {
         if (!isAlive) return;
-        Debug.LogError($"No tiene sentido que se cure si esta muerto, se cura {amount}");
-        Debug.LogWarning($"Se esta acabando la memoria cache");
         currentHealth += amount;
         currentHealth = Mathf.Min(currentHealth, maxHealth); // vida maxima
         onHealthChanged?.Invoke(currentHealth);
@@ -51,8 +51,6 @@ public class HealthSystem : MonoBehaviour
     public void Revivir()
     {
         isAlive = true;
-        Debug.Log($"Valor de variable isAlive: {isAlive}");
-        Debug.LogError($"Error de variable isAlive: {isAlive}");
     }
 
     private void Die()
@@ -70,5 +68,14 @@ public class HealthSystem : MonoBehaviour
     public bool IsAlive()
     {
         return isAlive;
+    }
+    
+    public float GetCurrentHealth()
+    {
+        return currentHealth;
+    }
+    public float GetMaxHealth()
+    {
+        return maxHealth;
     }
 }
