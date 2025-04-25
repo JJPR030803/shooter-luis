@@ -9,11 +9,11 @@ namespace Jugador
         [SerializeField] private float damage = 10f;
         [SerializeField] private bool destruir = false;
 
-        private void OnTriggerEnter(Collider other)
+        private void OnCollisionEnter(Collision other)
         {
-            if (other.CompareTag("Player"))
+            if (other.gameObject.CompareTag("Player"))
             {
-                HealthSystem health = other.GetComponent<HealthSystem>();
+                HealthSystem health = other.gameObject.GetComponent<HealthSystem>();
                 if (health != null)
                 {
                     health.TakeDamage(damage);
