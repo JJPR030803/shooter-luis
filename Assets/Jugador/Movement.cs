@@ -1,14 +1,9 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Jugador
 {
     public class Movement : MonoBehaviour
     {
-        
-        [Header("Configuracion de Movimiento")]
-        [SerializeField] private float velocidad = 10f;
-        [SerializeField] private float gravedad = -9.18f;
         
         private CharacterController controller;
         private Vector3 velocity;
@@ -27,7 +22,6 @@ namespace Jugador
          Vector3 movement = transform.right * horizontalInput + transform.forward * verticalInput;
          
          //Aplicar movimiento 
-         controller.Move(movement * velocidad * Time.deltaTime);
          
          //Aplicar gravedad
          if (controller.isGrounded && velocity.y < 0)
@@ -35,7 +29,6 @@ namespace Jugador
              velocity.y = -2f;
          }
          
-         velocity.y += gravedad * Time.deltaTime;
          controller.Move(velocity * Time.deltaTime);
         }
     }
